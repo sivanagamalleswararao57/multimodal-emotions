@@ -21,6 +21,8 @@ label_encoder = joblib.load('label_encoder.pkl')
 
 scaler = joblib.load('standard_scaler.pkl')
 
+nltk.download('stopwords')
+
 # Load your pre-trained models from the directory
 model_paths = {
     "DenseNet121": "densenet121_model.keras",
@@ -48,7 +50,7 @@ def load_speech_models(speech_model_paths):
         try:
             models[name] = load_model(path)
         except Exception as e:
-            st.write(f"Error loading speech model {name} from path {path}: {e}")
+            print(f"Error loading speech model {name} from path {path}: {e}")
     return models
 
 speech_models = load_speech_models(speech_model_paths)
